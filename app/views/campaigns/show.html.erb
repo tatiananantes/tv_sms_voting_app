@@ -1,0 +1,25 @@
+<h1><%= @campaign.name %></h1>
+
+<h3>Non-valid votes: <%= @campaign.non_valid_votes %></h3>
+<h3>Errors count: <%= @campaign.count_errors %></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @campaign.candidates.each do |candidate| %>
+      <% unless candidate.name.blank? %>
+        <tr>
+          <td><%= candidate.name %></td>
+          <td><%= candidate.score %></td>
+        </tr>
+     <% end %> 
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Back to campaigns", campaigns_path %>
