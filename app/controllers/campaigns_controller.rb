@@ -1,6 +1,6 @@
 class CampaignsController < ApplicationController
   
-  def index
+  def index 
     @campaigns = Campaign.joins(:votes).distinct
   end
 
@@ -8,5 +8,4 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.find(params[:id])
     @candidates = @campaign.candidates
   end
-
 end

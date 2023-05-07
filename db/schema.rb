@@ -31,9 +31,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_06_123724) do
   create_table "votes", force: :cascade do |t|
     t.integer "epoch"
     t.bigint "campaign_id", null: false
-    t.bigint "candidate_id", null: false
+    t.bigint "candidate_id"
     t.string "validity"
-    t.boolean "error"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["campaign_id"], name: "index_votes_on_campaign_id"
