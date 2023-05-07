@@ -1,25 +1,44 @@
-<h1><%= @campaign.name %></h1>
+<div class="px-4 sm:px-6 lg:px-8">
+  <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+      <h1 class="text-xl font-bold leading-7 text-slate-700 sm:truncate font-mono sm:text-3xl tracking-wide">Metrics Page for campaign:  <%= @campaign.name %></h1>
+      <h3 class="mt-2 text-lg font-medium text-blue-900 font-mono">Non-valid votes: <%= @campaign.non_valid_votes %></h3>
+      <h3 class="mt-2 text-lg font-medium text-orange-700 font-mono">Errors count: <%= @campaign.count_errors %></h3>
+    </div>
+  </div>
 
-<h3>Non-valid votes: <%= @campaign.non_valid_votes %></h3>
-<h3>Errors count: <%= @campaign.count_errors %></h3>
+  <div class="mt-8 flow-root">
+    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+        <table class="min-w-full divide-y divide-gray-600">
+          <thead>
+            <tr>
+              <th scope="col" class="py-3.5 pl-4 pr-3 text-center text-md font-semibold text-gray-900 sm:pl-0">
+                Name
+              </th>
+              <th scope="col" class="px-3 py-3.5 text-center text-md font-semibold text-gray-900">
+                Score
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <% @campaign.candidates.each do |candidate| %>
+              <% unless candidate.name.blank? %>
+                <tr>
+                  <td class="whitespace-nowrap text-center px-3 py-4 text-md text-gray-500"><%= candidate.name %></td>
+                  <td class="whitespace-nowrap text-center px-3 py-4 text-md text-gray-500"><%= candidate.score %></td>
+                </tr>
+              <% end %> 
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Score</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @campaign.candidates.each do |candidate| %>
-      <% unless candidate.name.blank? %>
-        <tr>
-          <td><%= candidate.name %></td>
-          <td><%= candidate.score %></td>
-        </tr>
-     <% end %> 
-    <% end %>
-  </tbody>
-</table>
-
-<%= link_to "Back to campaigns", campaigns_path %>
+  <%= link_to campaigns_path do %>
+    <div type="button" class="mt-6 rounded-md bg-indigo-600 px-2 py-6 text-center text-md font-normal font-mono text-white shadow-sm hover:bg-indigo-500">
+     Back to campaigns
+    </div>
+  <% end %>
+</div>

@@ -1,6 +1,22 @@
-<h1>Welcome to the Campaigns Index Page</h1>
-<ul>
-  <% @campaigns.each do |campaign| %>
-    <li><%= link_to campaign.name, campaign %></li>
-  <% end %>
-</ul>
+ <div class="px-4 sm:px-6 lg:px-8">
+  <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+      <h1 class="text-6xl font-bold font-mono text-slate-700 sm:text-3xl tracking-wide">Welcome to the TV SMS Voting App</h1>
+      <p class="text-md pt-8 leading-7 tracking-wide text-slate-700 sm:text-3xl fonto-mono tracking-light">Select a campaign</p>
+    </div>
+  </div>
+
+  <div class="flex w-full mt-6">
+    <ul role="list" class="divide-y divide-gray-200 overflow-hidden text-center bg-white w-1/2 shadow-lg ring-1 ring-gray-900/5 sm:rounded-xl">
+      <% @campaigns.each do |campaign| %>
+        <%= link_to campaign_path(campaign), class: "block" do %>
+          <li class="relative flex font-mono justify-between tracking-wide gap-x-6 px-4 py-5 hover:bg-gray-50 sm:px-6">
+            <%= campaign.name %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+ 
