@@ -31,20 +31,33 @@
 - Design/UI: Used TailWind to quickly add some basic design to the application 
 - Testing: 100 % test coverage using RSPEC
 
-#### Screenshots 
--> http://localhost:3000/campaigns/
+#### Screenshots
+
+Campaigns index page
+
 <img width="1212" alt="Screenshot 2023-05-08 at 00 42 25" src="https://user-images.githubusercontent.com/10349072/236811590-c0f616be-1534-44a8-80f8-92966c57daa5.png">
 
-> http://localhost:3000/campaigns/1
+Campaign show page
+
 <img width="907" alt="Screenshot 2023-05-08 at 00 42 34" src="https://user-images.githubusercontent.com/10349072/236811618-ec653da5-616c-437d-9303-90b384a1a517.png">
 
-> Test Coverage
+Test Coverage
+
 ![Screenshot 2023-05-07 at 20 14 29](https://user-images.githubusercontent.com/10349072/236857519-9b8e2c5a-8e52-4b22-a934-b36a09bea87d.png)
 
-> No failing tests
+No failing tests
+
 ![image](https://user-images.githubusercontent.com/10349072/236858741-a35d70ab-9d47-44ee-b44e-1ceb24f6626e.png)
 
-> Data Upload in DB
+Data Upload in DB
+
 ![Screenshot 2023-05-07 at 20 14 14](https://user-images.githubusercontent.com/10349072/236857651-800bb646-2deb-4c18-b8d0-7d48886f65fc.png)
 
+### How to run
+- Clone the repo to your local `https://github.com/tatiananantes/tv_sms_voting_app.git`
+- Go into the project directory: `cd tv_sms_voting_app`
+- Run `bundle install` to install required dependencies
+- Set up DB by running: `rails db:create db:migrate`
+- Run the import script in a terminal window `rails runner app/scripts/import_log_file_runner.rb` to run the sample votes.txt file or `rails runner app/scripts/import_log_file_runner.rb <path/to/anotherfile>`. You will see the message 'Processing' and then 'Done' once the upload has been completed. You can check the DB has been populated with this data 
+- Go `http://localhost:3000/campaigns/` to view the app
 
