@@ -7,6 +7,8 @@ module ImportLogFile
 
     puts "Processing..."
 
+    cache = {:campaign =>{}, :candidate=>{}}
+
     File.foreach(votes_file) do |line|
       begin
         fields = line.chomp.split(/\s+/)
@@ -17,8 +19,8 @@ module ImportLogFile
         candidate_name = fields[4].split(':', 2)[1].capitalize
         validity = fields[3].split(':', 2)[1]
 
-        campaign = Campaign.find_or_create_by(name: campaign_name)
-        candidate = candidate_name.present? ? campaign.candidates.find_or_create_by(name: candidate_name) : nil
+        campaign = find_or_create_campaign(campaign_name, cache)
+        candidate = find_or_create_candidate(candidate_name, campaign, cache)
         Vote.create(epoch: epoch, campaign: campaign, candidate: candidate, validity: validity)
       rescue StandardError => e
         puts "Error processing line: #{line.strip}\n#{e.message}"
@@ -33,4 +35,20 @@ module ImportLogFile
     import_votes(votes_file)
   end
 
+  private
+
+  def find_or_create_campaign(campaign_name, cache)
+    begin
+      cache[:campaign][campaign_name] ||= Campaign.find_or_create_by(name: campaign_name)
+    rescue 
+      cache[:campaign][campaign_name] ||= Campaign.find_by(name: campaign_name)
+    end
+    
+  end
+
+  def find_or_create_candidate(candidate_name, campaign, cache)
+    return nil if candidate_name == ""
+    # cache[:candidate]||= {}
+    cache[:candidate][[campaign.id, candidate_name]] ||= campaign.candidates.find_or_create_by(name: candidate_name)
+  end
 end
